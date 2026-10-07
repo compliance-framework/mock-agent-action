@@ -1,4 +1,0 @@
-lisa-design:
-- ci.yml is a thin caller: default ci-action.yml inputs (Dockerfile, context .), so no `with:` on the ci job.
-- Both reusable workflows pinned to workflows@87edd2b700d6dc6de8d49c1f44e525dd39e4db31 (trial of workflows#7); notify passes the same SHA as workflows-ref because a reusable workflow can't see its own ref.
-- Top-level permissions: {} with per-job grants exactly as the workflows README documents (ci: actions/contents/pull-requests read + security-events write; notify: actions/contents read).

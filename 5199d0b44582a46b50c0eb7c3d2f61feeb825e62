@@ -1,0 +1,4 @@
+lisa-selfreview:
+pass 1:
+- [must-fix] CORE-TEST-001 Dockerfile:17 build guard (seed / bumped / missing-binary source) has no automated test (fp 96aecf40c7c4)
+- [nit] Dockerfile:13 binary lands in two image layers (COPY then install+rm) (fp 6f2b5f7f00fd)

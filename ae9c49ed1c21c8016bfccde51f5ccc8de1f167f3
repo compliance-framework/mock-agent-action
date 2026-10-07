@@ -5,3 +5,7 @@ lisa-design:
 - No preview.yml: this action publishes no image, so there is nothing to preview.
 - ci.yml pull_request types include labeled/unlabeled so release-checks re-runs when release:major-approved is added (README requirement).
 - release.yml grants contents: write (move v<major> tag) and packages: write (release-finished prune), per README.
+
+lisa-selfreview:
+pass 1: CORE-DOC-001 [should-fix] README.md: "version.txt holds the current version" doesn't say release-please now maintains it or that a final release moves the v<major> tag users pin (@v0). Fix: one sentence in README.
+pass 1: CORE-DUP-001 considered and dismissed: the pinned SHA appears 6 times by design (task requires identical full SHAs; recorded in lisa-design).

@@ -1,0 +1,17 @@
+name: release
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+
+jobs:
+  # A final vX.Y.Z release moves the v<X> tag to the release commit; a release candidate moves nothing.
+  release:
+    uses: compliance-framework/workflows/.github/workflows/release-action.yml@084cc5d5ee6a40455f84b4f3108cfb254654ae28
+    permissions:
+      contents: write
+      packages: write
+    secrets: inherit

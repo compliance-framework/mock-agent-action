@@ -1,0 +1,3 @@
+lisa-design:
+- initial-version is set as a top-level (default) key rather than per-package so every package in the manifest inherits it; placed right after bump-minor-pre-major to keep the version-policy keys together.
+- The manifest stays at 0.0.0: with no prior release, release-please uses initial-version (0.1.0) instead of its 1.0.0 default, so the version-guard's major-approval gate is not tripped. The open 1.0.0 release PR is left for release-please to regenerate after merge.

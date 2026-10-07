@@ -1,0 +1,7 @@
+lisa-design:
+- Every shared-workflow ref (ci-action, notify-failure, workflows-ref, release-checks, release-please, release-action) is the same full SHA 084cc5d5ee6a40455f84b4f3108cfb254654ae28; bump them together.
+- release-please-config.json is defaults.json@SHA verbatim plus packages; the release-please workflow warns on any drift, so don't edit the shared keys locally.
+- release-type simple: version.txt (0.0.0) is the version file; manifest seeded at 0.0.0 so the first feat gives 0.1.0 (bump-minor-pre-major).
+- No preview.yml: this action publishes no image, so there is nothing to preview.
+- ci.yml pull_request types include labeled/unlabeled so release-checks re-runs when release:major-approved is added (README requirement).
+- release.yml grants contents: write (move v<major> tag) and packages: write (release-finished prune), per README.

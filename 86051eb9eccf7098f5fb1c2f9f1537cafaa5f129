@@ -1,0 +1,2 @@
+lisa-selfreview:
+Self-review pass 1: approve, no findings. Mechanical repin of every compliance-framework/workflows SHA ref (uses: and workflows-ref:) from orphaned 084cc5d to branch ra/w1-s1-t05b-repo-settings-workflow. No SHA pin left. CHANGELOG.md's historical mention of workflows@084cc5d left as is (release history).

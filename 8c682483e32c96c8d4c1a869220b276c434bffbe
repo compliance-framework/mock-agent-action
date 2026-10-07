@@ -1,0 +1,2 @@
+lisa-addressed:
+- CORE-DOC-001: README now says release-please bumps version.txt and a final release moves v<X>.

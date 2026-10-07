@@ -1,3 +1,6 @@
 lisa-addressed:
 pass 2:
 - test/build.sh now rewrites any `FROM <ref> AS source` line, checks the committed Dockerfile only for the message, and tests the alpine placeholder explicitly; mutation check (guard removed) makes the test fail.
+
+lisa-selfreview:
+pass 3: approve, no findings.

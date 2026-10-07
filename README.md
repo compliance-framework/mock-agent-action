@@ -15,7 +15,8 @@ binary at `/app/mock-agent`, or the build fails.
     message: hello
 ```
 
-`version.txt` holds the current version.
+`version.txt` holds the current version. release-please (`.github/workflows/release-please.yml`) bumps it in
+its release PR, and publishing a final `vX.Y.Z` release moves the `v<X>` tag to it (`.github/workflows/release.yml`).
 
 `test/build.sh` (needs Docker) builds the image against the alpine placeholder, a source image with
 `/app/mock-agent`, and one without it (which must fail), rewriting only the source `FROM` line as

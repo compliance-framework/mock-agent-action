@@ -1,30 +1,37 @@
 #!/bin/sh
-# Builds the action image against three source stages and checks the result:
-#   seed:    the committed Dockerfile (alpine placeholder) builds and prints the stub line;
-#   bumped:  a scratch image with /app/mock-agent builds and runs that binary;
-#   missing: a scratch image without /app/mock-agent fails the build.
-# The bumped and missing cases rewrite only the source FROM line, as ccf-bump does.
+# Builds the action image and checks the result for each source stage:
+#   committed:   the Dockerfile as committed builds and prints the message input;
+#   placeholder: alpine:3.20 (the seed source) builds and prints the stub line;
+#   bumped:      a scratch image with /app/mock-agent builds and runs that binary;
+#   missing:     a scratch image without /app/mock-agent fails the build.
+# The last three rewrite only the source FROM line, as ccf-bump does, so the
+# script keeps working after ccf-bump has changed that line.
 set -eu
 
 repo=$(cd "$(dirname "$0")/.." && pwd)
 work=$(mktemp -d)
 tag="mock-agent-action-test-$$"
-trap 'rm -rf "$work"; docker image rm -f "$tag:seed" "$tag:bumped" "$tag:src-bin" "$tag:src-empty" >/dev/null 2>&1 || true' EXIT
+trap 'rm -rf "$work"; docker image rm -f "$tag:committed" "$tag:placeholder" "$tag:bumped" "$tag:src-bin" "$tag:src-empty" >/dev/null 2>&1 || true' EXIT
 
 fail() { echo "FAIL: $*" >&2; exit 1; }
 
 # Build the action with the source stage replaced by $1.
 build_with_source() {
-  sed "s#^FROM alpine:3.20 AS source\$#FROM $1 AS source#" "$repo/Dockerfile" > "$work/Dockerfile.$2"
+  sed "s#^FROM [^ ]* AS source\$#FROM $1 AS source#" "$repo/Dockerfile" > "$work/Dockerfile.$2"
   grep -q "^FROM $1 AS source\$" "$work/Dockerfile.$2" || fail "source FROM line not found in Dockerfile"
   docker build -q -f "$work/Dockerfile.$2" -t "$tag:$2" "$repo"
 }
 
-echo "== seed"
-docker build -q -t "$tag:seed" "$repo" >/dev/null
-out=$(docker run --rm -e INPUT_MESSAGE=seed-msg "$tag:seed")
-echo "$out" | grep -q '^message: seed-msg$' || fail "seed: message not printed: $out"
-echo "$out" | grep -q 'mock-agent binary not present' || fail "seed: stub line not printed: $out"
+echo "== committed"
+docker build -q -t "$tag:committed" "$repo" >/dev/null
+out=$(docker run --rm -e INPUT_MESSAGE=committed-msg "$tag:committed")
+echo "$out" | grep -q '^message: committed-msg$' || fail "committed: message not printed: $out"
+
+echo "== placeholder"
+build_with_source alpine:3.20 placeholder >/dev/null
+out=$(docker run --rm -e INPUT_MESSAGE=placeholder-msg "$tag:placeholder")
+echo "$out" | grep -q '^message: placeholder-msg$' || fail "placeholder: message not printed: $out"
+echo "$out" | grep -q 'mock-agent binary not present' || fail "placeholder: stub line not printed: $out"
 
 echo "== bumped"
 mkdir -p "$work/src-bin" "$work/src-empty"

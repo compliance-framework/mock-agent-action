@@ -1,0 +1,14 @@
+name: 'Mock Compliance Framework Agent'
+description: 'Mock of agent-action for developing CCF release automation. Not a product.'
+author: 'Compliance Framework'
+inputs:
+  message:
+    description: 'A message for the action to print'
+    required: false
+    default: 'hello from mock-agent-action'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+branding:
+  icon: 'shield'
+  color: 'blue'

@@ -1,0 +1,4 @@
+lisa-addressed:
+pass 1:
+- CORE-TEST-001 (fp 96aecf40c7c4): added test/build.sh covering seed, bumped (scratch image with /app/mock-agent) and missing-binary (must fail) source stages; README documents it.
+- binary-copied-twice-in-layers (fp 6f2b5f7f00fd): COPY now lands the binary directly in /usr/local/bin; the guard only checks it and removes the alpine-release marker.

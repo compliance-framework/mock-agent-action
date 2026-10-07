@@ -1,0 +1,7 @@
+lisa-design:
+- Only the source-stage FROM line changes on a ccf-bump; the rest of the Dockerfile must build against both the alpine placeholder and the real mock-agent image (a FROM scratch image with no shell), so the source stage has no RUN.
+- Binary contract: the mock-agent image provides /app/mock-agent (mirrors agent's /app/concom). W1-S0-T02 must put it there.
+- COPY uses root-level bracket wildcards (/ap[p]/mock-agen[t], /et[c]/alpine-releas[e]) so missing files are skipped under BuildKit; a wildcard in a deeper component fails with lstat when the parent dir is missing.
+- The final-stage RUN fails the build when the source is neither alpine (no /etc/alpine-release) nor has /app/mock-agent, so a bump to an image with the binary elsewhere fails loudly instead of shipping a stub.
+- Final stage is alpine:3.20 (not debian-slim like agent-action) to stay small; the entrypoint is POSIX sh.
+- `message` input is optional with a default so the action runs with no inputs; the entrypoint prints it, then execs mock-agent if present.

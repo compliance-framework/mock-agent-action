@@ -1,0 +1,30 @@
+name: ci
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize, reopened]
+  push:
+    branches: [main]
+
+permissions: {}
+
+jobs:
+  ci:
+    uses: compliance-framework/workflows/.github/workflows/ci-action.yml@87edd2b700d6dc6de8d49c1f44e525dd39e4db31
+    permissions:
+      actions: read
+      contents: read
+      pull-requests: read
+      security-events: write
+    secrets: inherit
+
+  notify:
+    needs: [ci]
+    if: failure()
+    uses: compliance-framework/workflows/.github/workflows/notify-failure.yml@87edd2b700d6dc6de8d49c1f44e525dd39e4db31
+    with:
+      workflows-ref: 87edd2b700d6dc6de8d49c1f44e525dd39e4db31
+    permissions:
+      actions: read
+      contents: read
+    secrets: inherit

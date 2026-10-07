@@ -16,3 +16,7 @@ binary at `/app/mock-agent`, or the build fails.
 ```
 
 `version.txt` holds the current version.
+
+`test/build.sh` (needs Docker) builds the image against the alpine placeholder, a source image with
+`/app/mock-agent`, and one without it (which must fail), rewriting only the source `FROM` line as
+`ccf-bump` does.

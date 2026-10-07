@@ -1,0 +1,2 @@
+lisa-selfreview:
+Self-review pass 1: mechanical ref swap (@ra/w1-s1-t05b-repo-settings-workflow -> @main, workflows-ref -> main) in .github/workflows, plus comments that said the stack branch is tracked now say main is tracked until v1 is tagged. compliance-framework/workflows main tree is identical to the old stack branch tree. No findings.

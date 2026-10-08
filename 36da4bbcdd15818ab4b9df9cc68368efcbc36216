@@ -1,0 +1,3 @@
+lisa-design:
+- Only `closed` is appended to the pull_request types; every existing type is kept, no pins or other files change (spec W1-S3-MOCK-CLOSED).
+- Safe on closed PRs at workflows v1.3.0: ci-action.yml skips every job (and `required`) on a closed PR, release-checks.yml requires state != closed, and notify-failure.yml's closed path only updates the PR's needs-human card and CI incident.

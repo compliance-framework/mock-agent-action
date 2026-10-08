@@ -2,7 +2,7 @@
 # `FROM ghcr.io/compliance-framework/agent:<ver> AS source`).
 # mock-agent has no published image yet, so this starts on alpine.
 # replaced by ghcr.io/compliance-framework/mock-agent:<version> via ccf-bump
-FROM ghcr.io/compliance-framework/mock-agent:0.1.0 AS source
+FROM ghcr.io/compliance-framework/mock-agent:0.1.1 AS source
 
 # Stage 2: small final image that runs the binary.
 FROM alpine:3.24

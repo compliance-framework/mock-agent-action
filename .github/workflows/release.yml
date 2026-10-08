@@ -10,7 +10,7 @@ permissions:
 jobs:
   # A final vX.Y.Z release moves the v<X> tag to the release commit; a release candidate moves nothing.
   release:
-    uses: compliance-framework/workflows/.github/workflows/release-action.yml@main
+    uses: compliance-framework/workflows/.github/workflows/release-action.yml@5a81b1ac6081babf702713afb497d5a4f5c662bf # v1.0.0
     permissions:
       contents: write
       packages: write

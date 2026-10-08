@@ -5,7 +5,7 @@
 FROM ghcr.io/compliance-framework/mock-agent:0.1.0 AS source
 
 # Stage 2: small final image that runs the binary.
-FROM alpine:3.20
+FROM alpine:3.24
 
 # The bracketed names are wildcards, so a missing file is skipped instead of
 # failing the build: the seed source (alpine) has no binary, and the mock-agent

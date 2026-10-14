@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.3](https://github.com/compliance-framework/mock-agent-action/compare/v0.1.2...v0.1.3) (2026-10-14)
+
+
+### Bug Fixes
+
+* **deps:** bump mock-agent to v0.1.2 ([#26](https://github.com/compliance-framework/mock-agent-action/issues/26)) ([f153402](https://github.com/compliance-framework/mock-agent-action/commit/f153402aaa6d8196f623c37be1326ba740070351))
+
 ## [0.1.2](https://github.com/compliance-framework/mock-agent-action/compare/v0.1.1...v0.1.2) (2026-10-08)
 
 
